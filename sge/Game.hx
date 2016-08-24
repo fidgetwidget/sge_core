@@ -174,5 +174,6 @@ class Game {
 
   inline function get_isPaused():Bool return _isPaused;
  
+  public function toString():String return 'Game[ready:$_isReady paused:$_isPaused start:$_startTimestamp step:$_frameStep ]';
 
 }

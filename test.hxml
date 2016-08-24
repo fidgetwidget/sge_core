@@ -9,17 +9,17 @@
 #-D HXCPP_M64
 -cpp bin/cpp_test
 
---next
+# --next
 
-## JavaScript
--main TestMain
--lib munit
--lib openfl
--lib lime
--cp sge
+# ## JavaScript
+# -main TestMain
+# -lib munit
+# -lib openfl
+# -lib lime
+# -cp sge
 
--cp tests
--js bin/js_test.js
+# -cp tests
+# -js bin/js_test.js
 
 # --next
 
