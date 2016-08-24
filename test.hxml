@@ -1,0 +1,35 @@
+## CPP
+-main TestMain
+-lib munit
+-lib openfl
+-lib lime
+-cp sge
+
+-cp tests
+#-D HXCPP_M64
+-cpp bin/cpp_test
+
+--next
+
+## JavaScript
+-main TestMain
+-lib munit
+-lib openfl
+-lib lime
+-cp sge
+
+-cp tests
+-js bin/js_test.js
+
+# --next
+
+# ## Flash 9+
+# -main TestMain
+# -lib munit
+# -lib openfl
+# -lib lime
+# -cp sge
+
+# -cp tests
+# -swf-version 11
+# -swf bin/as3_test.swf

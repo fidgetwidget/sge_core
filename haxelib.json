@@ -1,0 +1,10 @@
+{
+  "name" : "sge",
+  "url" : "http://fidgetwidget.ca",
+  "license" : "MIT",
+  "description" : "Small Galaxy Engine",
+  "version" : "0.0.1",
+  "releasenote" : "",
+  "contributors" : ["fidgetwidget"],
+  "dependencies" : { "lime": "", "openfl": "" }
+}
