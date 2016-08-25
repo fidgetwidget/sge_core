@@ -7,8 +7,18 @@ package sge.math;
 // drag
 // rotation drag (optional)
 // 
-class Motion
+class Motion implements Recyclable<Motion>
 {
+
+  // Static
+
+  public static function get():Motion return pool.pop();
+
+  public static function put(item:Motion):Void pool.push(item.clear());
+
+  public static var pool:Pool<Motion> = new Pool<Motion>( function() { return new Motion(); });
+
+
 
   public var velocity:              Vector2;
   public var acceleration:          Vector2;
