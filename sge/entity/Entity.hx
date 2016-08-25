@@ -82,8 +82,8 @@ class Entity implements HasBounds
   public function new() 
   {
     _id       = Entity.getNextId();
-    transform = new Transform();
-    motion    = new Motion();
+    transform = Transform.get();
+    motion    = Motion.get();
     shape = null;
     collider = null;
     _sprite = null;
@@ -237,7 +237,7 @@ class Entity implements HasBounds
 
 
   // Public getter
-  public inline function get_bounds():AABB return (shape == null ? null : shape.get_bounds());
+  public function get_bounds():AABB return (shape == null ? null : shape.get_bounds());
 
 
 }
