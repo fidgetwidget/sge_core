@@ -67,6 +67,8 @@ class SceneManager {
       sceneId = identifier;
     else if (Std.is(identifier, String))
       sceneId = sceneId_by_name.get(identifier);
+    else if (Std.instance(identifier, Scene))
+      sceneId = Reflect.field(identifier, "id");
     else
     {
       throw {
