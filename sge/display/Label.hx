@@ -61,6 +61,10 @@ class Label implements Recyclable<Label>
 
   public var y(get, set):Float;
 
+  public var width(get, set):Float;
+
+  public var height(get, set):Float;
+
 
   // Because we do the recycling, we don't want to have any arguments in the constructor
   public function new() 
@@ -128,6 +132,7 @@ class Label implements Recyclable<Label>
   // Properties
 
   var _id:Int;
+  // var _name:String;
   var _renderTarget:Sprite;
   var _sprite:Sprite;
   var _background:Shape;
@@ -203,5 +208,11 @@ class Label implements Recyclable<Label>
     _sprite.y = transform.y = value;
     return transform.y;
   }
+
+  inline function get_width():Float return _textfield.textWidth;
+  inline function set_width(value:Float):Float return _textfield.textWidth = value;
+
+  inline function get_height():Float return _textfield.textHeight;
+  inline function set_height(value:Float):Float return _textfield.textHeight = value;
 
 } //Bounds
