@@ -71,7 +71,7 @@ class SceneManager {
       sceneId = identifier;
     else if (Std.is(identifier, String))
       sceneId = sceneId_by_name.get(identifier);
-    else if (Std.instance(identifier, Scene))
+    else if (Std.is(identifier, Scene))
       sceneId = Reflect.field(identifier, "id");
     else
     {
@@ -227,7 +227,7 @@ class SceneManager {
   {
     var arr = [];
     for (id in activeSceneIds)
-      arr.push(scenes_by_id(id));
+      arr.push(scenes_by_id.get(id));
     return arr;
   }
 
@@ -235,7 +235,7 @@ class SceneManager {
   {
     var arr = [];
     for (id in visibleSceneIds)
-      arr.push(scenes_by_id(id));
+      arr.push(scenes_by_id.get(id));
     return arr;
   }
 
