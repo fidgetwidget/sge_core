@@ -38,6 +38,10 @@ class SceneManager {
   // Instance
   // 
 
+  public var top(get, never):Scene;
+  public var activeScenes(get, never):Array<Scene>;
+  public var visibleScenes(get, never):Array<Scene>;
+
 
   function new() 
   {
@@ -201,10 +205,38 @@ class SceneManager {
     }
   }
   
+  // 
+  // Properties
+  // 
+
   var scenes_by_id:Map<Int,Scene>;
   var sceneId_by_name:Map<String, Int>;
   var activeSceneIds:Array<Int>;
   var visibleSceneIds:Array<Int>;
   var sceneIdsToRemove:Array<Int>;
+
+  inline function get_top():Scene
+  {
+    var l, id;
+    l = activeSceneIds.length;
+    id = activeSceneIds[l - 1];
+    return scenes_by_id[id];
+  }
+
+  inline function get_activeScenes():Array<Scene>
+  {
+    var arr = [];
+    for (id in activeSceneIds)
+      arr.push(scenes_by_id(id));
+    return arr;
+  }
+
+  inline function get_visibleScenes():Array<Scene>
+  {
+    var arr = [];
+    for (id in visibleSceneIds)
+      arr.push(scenes_by_id(id));
+    return arr;
+  }
 
 } //SceneManager
