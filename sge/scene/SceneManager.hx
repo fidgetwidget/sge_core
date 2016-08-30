@@ -72,27 +72,20 @@ class SceneManager {
     else if (Std.is(identifier, String))
       sceneId = sceneId_by_name.get(identifier);
     else if (Std.is(identifier, Scene))
-      sceneId = Reflect.field(identifier, "id");
+      sceneId = Reflect.getProperty(identifier, "id");
     else
-    {
-      throw {
-        message: "SceneManager.push requiers a String or Int identifier",
-        callStack: CallStack.callStack(),
-      };
-    }
+      throw 'SceneManager.push requiers a valid identifier';
 
-    if (activeSceneIds.length > 0)
-    {
-      var l = activeSceneIds.length;
-      var id = activeSceneIds[l - 1];
-      scenes_by_id[id].focus = false;
-    }
+    if (! scenes_by_id.exists(sceneId) || (scene = scenes_by_id.get(sceneId)) == null)
+      throw 'Scene not found: [$sceneId]';
 
-    scene = scenes_by_id[sceneId];
+    // scene = scenes_by_id.get(sceneId); <-- moved into the condition above
+    unfocusActiveScene();
     activeSceneIds.push(sceneId);
-    if (scene.opaque) {
+
+    if (scene.opaque)
       clearVisibleScenes();
-    }
+
     makeVisible(scene);
     scene.focus = true;
   }
@@ -103,10 +96,7 @@ class SceneManager {
   //    input intended for the now removed scene)
   public function pop():Void
   {
-    var id, l;
-    l = activeSceneIds.length;
-    id = activeSceneIds[l-1];
-    sceneIdsToRemove.push( id );
+    if (activeSceneIds.length > 0) sceneIdsToRemove.push( top.id );
   }
 
   // Update the active scenes
@@ -116,6 +106,7 @@ class SceneManager {
 
     if (sceneIdsToRemove.length > 0)
     {
+
       while(sceneIdsToRemove.length > 0)
       {
         id = sceneIdsToRemove.pop();
@@ -124,12 +115,7 @@ class SceneManager {
       }
 
       // if there are still active scenes, give the top one focus
-      l = activeSceneIds.length;
-      if (l > 0)
-      {
-        id = activeSceneIds[l-1];
-        scenes_by_id[id].focus = true;
-      }
+      focusActiveScene();
       rebuildVisibleList(); 
     }
 
@@ -204,6 +190,17 @@ class SceneManager {
       scene.visible = false; 
     }
   }
+
+  inline function unfocusActiveScene():Void 
+  {
+    if (activeSceneIds.length > 0) top.focus = false;
+  }
+
+  inline function focusActiveScene():Void
+  {
+    if (activeSceneIds.length > 0) top.focus = true;
+  }
+  
   
   // 
   // Properties
@@ -219,8 +216,12 @@ class SceneManager {
   {
     var l, id;
     l = activeSceneIds.length;
-    id = activeSceneIds[l - 1];
-    return scenes_by_id[id];
+    if (l > 0)
+    {
+      id = activeSceneIds[l - 1];
+      return scenes_by_id[id];
+    }
+    return null;
   }
 
   inline function get_activeScenes():Array<Scene>
