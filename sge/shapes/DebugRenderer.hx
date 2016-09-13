@@ -7,9 +7,8 @@ import sge.math.Bitwise;
 import sge.math.Vector2;
 
 // 
-// The Body for a transform (position)
+// Drawing Helper
 // 
-
 @:publicFields
 class DebugRenderer
 {

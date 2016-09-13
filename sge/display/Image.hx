@@ -1,10 +1,12 @@
 package sge.display;
 
-import sge.Pool;
-import sge.Recyclable;
+import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.display.Sprite;
+import sge.Pool;
+import sge.Recyclable;
+import sge.Sge;
 import sge.math.Transform;
 import sge.math.Vector2;
 
@@ -40,6 +42,20 @@ class Image implements Recyclable<Image>
     image.bitmapData = tileFrame.bitmapData;
     image.anchor.x = tileFrame.anchor.x;
     image.anchor.y = tileFrame.anchor.y;
+
+    return image;
+  }
+
+  public static function fromFrameData( data:FrameData, image:Image = null ):Image
+  {
+    var rect;
+    image = image == null ? Image.get() : image;
+
+    if (image.bitmap == null)
+      image.createBitmap(data.rect_w, data.rect_h, 0xffffffff);
+    
+    rect = new Rectangle(data.rect_x, data.rect_y, data.rect_w, data.rect_h);
+    image.bitmapData.copyPixels(Assets.getBitmapData(data.sourcePath), rect, Sge.zero);
 
     return image;
   }
