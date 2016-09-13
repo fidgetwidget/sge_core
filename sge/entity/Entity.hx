@@ -48,9 +48,11 @@ class Entity implements HasBounds
 
   public var motion:Motion;
 
-  public var collider:ShapeCollider;
 
+  // Optional
+  public var collider:ShapeCollider;
   public var shape:Shape;
+  public var routine:Routine;
 
   // the basic transform
   public var x(get, set):               Float;
@@ -83,9 +85,13 @@ class Entity implements HasBounds
   {
     _id       = Entity.getNextId();
     transform = Transform.get();
+    // NOTE: maybe motion should be optional...
     motion    = Motion.get();
+
     shape = null;
     collider = null;
+    routine = null;
+
     _sprite = null;
   }
 
@@ -96,6 +102,7 @@ class Entity implements HasBounds
     motion.clear();
     shape = null;
     collider = null;
+    routine = null;
     _sprite = null;
     return this;
   }
@@ -141,7 +148,7 @@ class Entity implements HasBounds
   // Base Update function
   public function update():Void 
   {
-    // TODO: figure out a good way to handle default logic update_logic() || update_state()
+    update_routine(Game.instance.delta);
     update_motion(Game.instance.delta);
   }
 
@@ -151,6 +158,12 @@ class Entity implements HasBounds
   // 
   // Internal
   // 
+
+  inline function update_routine( delta:Float ):Void
+  {
+    if (routine == null) return; // in case they for some reason nulled the motion
+    routine.update( delta, scene, this );
+  }
 
   inline function update_motion( delta:Float ):Void
   {

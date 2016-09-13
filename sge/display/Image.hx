@@ -4,6 +4,7 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.display.Sprite;
+import openfl.geom.Rectangle;
 import sge.Pool;
 import sge.Recyclable;
 import sge.Sge;
