@@ -58,6 +58,9 @@ class Image implements Recyclable<Image>
     rect = new Rectangle(data.rect_x, data.rect_y, data.rect_w, data.rect_h);
     image.bitmapData.copyPixels(Assets.getBitmapData(data.sourcePath), rect, Sge.zero);
 
+    image.anchor.x = rect.width * 0.5;
+    image.anchor.y = rect.height * 0.5;
+
     return image;
   }
 

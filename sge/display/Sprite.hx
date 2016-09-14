@@ -52,15 +52,17 @@ class Sprite extends Image implements Recyclable<Sprite>
     else
       bitmapData = tileFrame.bitmapData;
     
-    anchor = tileFrame.anchor;
+    anchor.x = tileFrame.anchor.x;
+    anchor.y = tileFrame.anchor.y;
   }
 
   public function copyImage( image:Image ):Void
   {
     bitmap = image.bitmap;
-    anchor = image.anchor;
-    renderTarget = image.renderTarget;
-    transform = image.transform;
+    anchor.x = image.anchor.x;
+    anchor.y = image.anchor.y;
+    // renderTarget = image.renderTarget;
+    // transform = image.transform;
   }
 
   override public function render():Void

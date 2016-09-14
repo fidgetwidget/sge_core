@@ -116,33 +116,29 @@ class Entity implements HasBounds
 
   public function createSprite( source:Dynamic ):Void
   {
-    if (Std.is(source, Sprite))
-    {
-      this.sprite = cast(sprite, Sprite);
-      return;
+    if (Std.is(source, Sprite)) {
+      sprite = cast(sprite, Sprite);
+    } else {
+      sprite = new Sprite();
     }
 
-    this.sprite = new Sprite();
-
-    if (Std.is(source, Image))
-    {
-      this.sprite.copyImage( cast(source, Image) );
+    if (Std.is(source, Image)) {
+      sprite.copyImage( cast(source, Image) );
     }
 
-    if (Std.is(source, TileFrame))
-    {
-      this.sprite.copyTileFrame( cast(source, TileFrame) );
+    if (Std.is(source, TileFrame)) {
+      sprite.copyTileFrame( cast(source, TileFrame) );
     }
 
-    if (Std.is(source, Bitmap))
-    {
-      this.sprite.bitmap = cast(source, Bitmap);
+    if (Std.is(source, Bitmap)) {
+      sprite.bitmap = cast(source, Bitmap);
     }
 
-    if (Std.is(source, BitmapData))
-    {
-      this.sprite.bitmap = new Bitmap( cast(source, BitmapData) );
+    if (Std.is(source, BitmapData)) {
+      sprite.bitmap = new Bitmap( cast(source, BitmapData) );
     }
+
+    sprite.transform = transform; // because one or more of these might set the transform to something passed in.
   }
 
   // Base Update function
